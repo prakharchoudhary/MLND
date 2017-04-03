@@ -12065,11 +12065,11 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> 
 <br><u>Original Index 12:</u><br>
-The quantities of Fresh, Milk, Grocery, Detergents_Paper and Delicatessen are observed to be far above the 75% for their respective categories. Also the frozen quantity is quite small. Hennce, it is most probably a supermarket.</p>
+The quantities of Fresh, Milk, Grocery, Detergents_Paper and Delicatessen are observed to be far above the 75% for their respective categories. Also the frozen quantity is quite small. Hennce, it is most probably a <strong>supermarket</strong>.</p>
 <p><br><u>Original Index 216:</u><br>
-Since both the frozen and Delicatessen values are far too low, one can say that this establishments is a grocery store which has a high demand for milk and is thus consument almost completely by the end of the day and nothing has to be stored.</p>
+While in this case the quantity of frzen is well below and Delicatessan is about midway the 25 and 50 percentile, we would initially assume it to be an establishment where fresh stuff is served and hence must be ab cafe or restaurant. However looking at the values of milk, grocery and detergents_paper that are far above their respecive <u>3rd quartiles</u>, we find them to be the dominant features for this establishment and hence lead us to classify this establishment as a <strong>grocery store</strong> with a large everyday retail of milk, hence the purchase.</p>
 <p><br><u>Original Index 439:</u><br>
-It is a small cafe.</p>
+The purchase for fresh, milk and grocery is about 25% of their respective categories, while those for frozen, detergents_paper and delicatessen are significantly lesser than their <u>first quartile</u>, thus making the first three, deciding factors. Now what kind of establishment requires a nearly equal amount fresh, milk and grocery? The best cvhoice would be a food joint, cafe or a restaurant. Keeping the small purchases while determining the size of this establishment, we can say that it is a <strong>small cafe</strong>.</p>
 
 </div>
 </div>
@@ -14809,6 +14809,49 @@ MzMzMzMzs7b8P6YbhZeIVDkmAAAAAElFTkSuQmCC
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="c1"># If two features are correlated then the values of their correlation will lie in the sdcale if [0,1]. Higher the value,</span>
+<span class="c1"># greater will be the correlation.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>                     Fresh      Milk   Grocery    Frozen  Detergents_Paper  \
+Fresh             1.000000  0.100510 -0.011854  0.345881         -0.101953   
+Milk              0.100510  1.000000  0.728335  0.123994          0.661816   
+Grocery          -0.011854  0.728335  1.000000 -0.040193          0.924641   
+Frozen            0.345881  0.123994 -0.040193  1.000000         -0.131525   
+Detergents_Paper -0.101953  0.661816  0.924641 -0.131525          1.000000   
+Delicatessen      0.244690  0.406368  0.205497  0.390947          0.069291   
+
+                  Delicatessen  
+Fresh                 0.244690  
+Milk                  0.406368  
+Grocery               0.205497  
+Frozen                0.390947  
+Detergents_Paper      0.069291  
+Delicatessen          1.000000  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -14857,7 +14900,7 @@ MzMzMzMzs7b8P6YbhZeIVDkmAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Scale the data using the natural logarithm</span>
@@ -20466,7 +20509,7 @@ QmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the log-transformed sample data</span>
@@ -20557,7 +20600,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_outliers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
@@ -20587,6 +20630,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 <span class="n">all_outliers</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">all_outliers</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
 <span class="n">outliers</span> <span class="o">=</span> <span class="n">all_outliers</span><span class="p">[</span><span class="n">counts</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">outliers</span>
 
 <span class="c1"># Remove the outliers, if any were specified</span>
 <span class="n">good_data</span> <span class="o">=</span> <span class="n">log_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">log_data</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">outliers</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
@@ -21218,6 +21262,13 @@ Once you have performed this implementation, the dataset will be stored in the v
 
 </div>
 
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ 65  66  75 128 154]
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -21237,7 +21288,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> For every feature all other features are shown as outliers, hence we can conclude that there are no outliers.</p>
+<p><strong>Answer:</strong> There are several datapoints which are outliers for more than one features,[ 65  66  75 128 154]. I belive these should be removed as they represent truly unusual behaviour with respect to the rest data and will be little to no use in forming clusters.</p>
 
 </div>
 </div>
@@ -21269,7 +21320,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
@@ -21882,6 +21933,39 @@ RU5ErkJggg==
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">pca_results</span><span class="p">[</span><span class="s1">&#39;Explained Variance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dimension 1    0.4430
+Dimension 2    0.7068
+Dimension 3    0.8299
+Dimension 4    0.9311
+Dimension 5    0.9796
+Dimension 6    1.0000
+Name: Explained Variance, dtype: float64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -21898,7 +21982,7 @@ RU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> The first principal component gives a variance of 0.4430 or 44.3% while the second component gives a variance of 0.2638 or 26.4%. Thus, the total variance is 70.7%. The variance given by third and fourth principal component are 0.1231 and 0.1012 respectively. Thus, the total variance after first four principal component is 0.9313 or 93.13%. From the visualisation it can be observed that in the first Principal Component the variance largely depends on Milk, Grocery and Detergents_Paper. While in the next Principal Component, there influence is diminished na dundermined by previously less influential features like Fresh, Frozen and Delicatessen. This pattern flows in the next two Principal Components too.</p>
+<p><strong>Answer:</strong> The first principal component gives a variance of 0.4430 or 44.3% while the second component gives a variance of 0.2638 or 26.4%. Thus, the total variance is 0.7068 or 70.7%. The variance given by third and fourth principal component are 0.1231 and 0.1012 respectively. Thus, the total variance after first four principal component is 0.9311 or 93.11%. It seems like the first dimension is heavily reliant on Detergents, Grocery, and Milk, which are the 3 features we identified above as being most highly correlated. The second dimension appears to be orthogonal to the first, reducing the impact of Milk, Grocery, and Detergents, and instead relying on variation in Fresh, Frozen, and Deli items. The third dimension appears to be low Fresh spending and high Deli spending, and the 4th too has a similar high/low pattern for low Deli, high Frozen.</p>
 
 </div>
 </div>
@@ -22003,7 +22087,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply PCA by fitting the good data with only two dimensions</span>
@@ -22036,7 +22120,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after applying PCA transformation in two dimensions</span>
@@ -22103,7 +22187,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Create a biplot</span>
@@ -22118,11 +22202,11 @@ RU5ErkJggg==
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0xb98ac90&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0xbd63650&gt;</pre>
 </div>
 
 </div>
@@ -23866,7 +23950,7 @@ fzmKI26Zh89hAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
@@ -23952,7 +24036,7 @@ The best silhoutte score is found for 2 clusters.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the results of the clustering from implementation</span>
@@ -25117,7 +25201,7 @@ A79vBCeK4vV8AAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Inverse transform the centers</span>
@@ -25204,8 +25288,12 @@ A79vBCeK4vV8AAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-Considering the high value for fresh of segment, we are biased to assume that the <strong>segment 0</strong> includes establishments that prefer to prepare fresh stuff for their customers, such as, restaurants, cafes etc.
-While on the hand, <strong>segment 1</strong> seems to have grocery and delicatessen in far larger quantities comparitively and can thus be positively assumed to include establishments like grocery store, supermarket.</p>
+The segments are divided into two groups: ones who buy a lot of fresh and frozen goods, but little detergents or grocery (Segment 0), and those customers who purchase lots of grocery/milk/detergents paper, some fresh, and some delicatessen (Segment 1).</p>
+<p><u>Segment 0:</u><br>
+The purchase of fresh and frozen is above 50% while that for milk, grocery and Detergents_Paper is more or less about 25%, of their respective categories. Considering the comparitively higher demand of fresh in segment 0 out of the two segments as well as frozen of similar quantities makes us classify it as a segment that represents establishements that serve food directly, mostly fresh. Hence, restaurant, food joints, cafes etc.
+<br><br>
+<u>Segment 1:</u><br>
+On the contrary, the purchase of milk/grocery/detergents_paper is well above 75% of their respective categories, along with delicatessen(above 50%) and fresh(a lil more than 25%). These values directly lead us to infer that this segment is made up of establishments that serve stuff that people can use to make food by themselves and hence includes Supermarket, grocery store etc.</p>
 
 </div>
 </div>
@@ -25223,7 +25311,7 @@ While on the hand, <strong>segment 1</strong> seems to have grocery and delicate
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the predictions</span>
@@ -25257,9 +25345,10 @@ Sample point 2 predicted to be in Cluster 0
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong>
-The sample with original index 12 was predicted to be a supermarket and considering that it lies in cluster 1, the prediction seems consistent. The same can be said for the original index 216, as it was predicted to be a grocery store and the above results show it lies in cluster 1 which corresponds to establishments like supermarket, grocery store etc.
-Furthermore, original index 439 which lies in cluster 0 that includes establishments like restaurants and cafes, was predcited to be a smalll cafe. Hence, all the predictions are consistent.</p>
+<p><strong>Answer:</strong><br>
+Sample with Index 12: I originally predicted this was a supermarket, this matches the cluster it has been assigned.</p>
+<p>Sample with Index 216: I predicted this to be a grocery store, this is consistent with it's cluster assignment.</p>
+<p>Sample with Index 439: I predicted this would be a small cafe, this too matches the cluster assignment</p>
 
 </div>
 </div>
@@ -25299,8 +25388,8 @@ Furthermore, original index 439 which lies in cluster 0 that includes establishm
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Considering the fact, that establishments like supermarket and grocery stores do not need too much of fresh supplies and prefer storage, a less frequent supply will not only prove to be economically beneficial for distributor but also help these establishment from keeping too much stuff in storage. Hence, the distributer can reduce its daily service from 5 days a week to 3 days a week in case of segment 1.<br>
-However, such a change is not advisable in case of segment 0, as they heavily rely on making fresh stuff for better business.</p>
+<p><strong>Answer:</strong> Considering the fact, that establishments like supermarket and grocery stores do not need too much of fresh supplies and prefer storage, a less frequent supply will not only prove to be economically beneficial for distributor but also help these establishment from keeping too much stuff in storage. Hence, the distributer can reduce its daily service from 5 days a week to 3 days a week in case of segment 1 or cluster 1.<br></p>
+<p>But then again the above inference is merely intutiver and thus we can use A/B testing for both clusters. We could conduct useful A/B testing of both groups by selecting a small but statistically significant sample of customers from each cluster and using the remainder of their cluster as the control group. We could apply the new 3 day schedule to just the sample for each cluster, and measure how their reported service satsifaction changes with respect to their control groups. This would give us data on how the schedule change affects customers in these 2 seperate categories, which will reveal if the schedule is more helpful/damaging to one group or the other</p>
 
 </div>
 </div>
@@ -25340,7 +25429,7 @@ However, such a change is not advisable in case of segment 0, as they heavily re
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the clustering results based on &#39;Channel&#39; data</span>
