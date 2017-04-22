@@ -125,14 +125,17 @@ class LearningAgent(Agent):
                 print 'random action: {}, epsilon: {}, maxQ: {}'.format(random.choice(self.valid_actions),self.epsilon, self.get_maxQ(state))
                 action = random.choice(self.valid_actions)
             else:
-                keys = []
-                print("self.get_maxQ(state) = {}".format(self.get_maxQ(state)))
-                for key, value in self.Q[state].items():
-                    if value == self.get_maxQ(state):
-                        keys.append(key)
-                print("actions taken: {}".format(keys)) 
-                action = random.choice(keys)
-            
+                # keys = []
+                # print("self.get_maxQ(state) = {}".format(self.get_maxQ(state)))
+                # for key, value in self.Q[state].items():
+                #     if value == self.get_maxQ(state):
+                #         keys.append(key)
+                # print("actions taken: {}".format(keys)) 
+                # action = random.choice(keys)
+                
+                maxQ = self.get_maxQ(state)
+                action = random.choice([action for action in self.valid_actions if self.Q[state][action]==maxQ])
+
             return action
 
 
@@ -206,7 +209,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10, tolerance=0.0005)
+    sim.run(n_test=20, tolerance=0.0005)
 
 
 if __name__ == '__main__':
